@@ -1,0 +1,15 @@
+PODS:
+  - ReactiveObjC (3.0.0)
+  - TesseractOCRiOS (4.0.0)
+
+DEPENDENCIES:
+  - ReactiveObjC (= 3.0.0)
+  - TesseractOCRiOS (= 4.0.0)
+
+SPEC CHECKSUMS:
+  ReactiveObjC: ce79989e8684b9086b5f8d0c74bc7b81a8729c9e
+  TesseractOCRiOS: 90638afbe43d082433f2e76b384c7901d23956df
+
+PODFILE CHECKSUM: 955be7a368a599d6afff189005cfb0b05df2ec37
+
+COCOAPODS: 1.0.1

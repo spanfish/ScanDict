@@ -8,8 +8,11 @@
 
 #import <UIKit/UIKit.h>
 #import <TesseractOCR/TesseractOCR.h>
+#import <QuartzCore/QuartzCore.h>
+#import <ReactiveObjC/ReactiveObjC.h>
+#import <AVFoundation/AVFoundation.h>
 
-@interface ViewController : UIViewController<G8TesseractDelegate>
+@interface ViewController : UIViewController<G8TesseractDelegate, AVCaptureMetadataOutputObjectsDelegate>
 
 
 @end

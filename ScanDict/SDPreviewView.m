@@ -47,6 +47,10 @@ typedef struct ControlCornerPoint {
     ControlCorner currentControlCorner;
     
     UIPanGestureRecognizer *resizeRegionOfInterestGestureRecognizer;
+    
+    AVCaptureVideoPreviewLayer *videoPreviewLayer;
+    
+    AVCaptureSession *session;
 }
 @end
 
@@ -74,6 +78,10 @@ typedef struct ControlCornerPoint {
         [self commonInit];
     }
     return self;
+}
+
++(Class) layerClass {
+    return [AVCaptureVideoPreviewLayer class];
 }
 
 -(void) commonInit {

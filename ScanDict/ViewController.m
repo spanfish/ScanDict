@@ -84,4 +84,10 @@
                                sourceImage:(UIImage *)sourceImage {
     return nil;
 }
+
+- (void)captureOutput:(AVCaptureOutput *)captureOutput
+didOutputMetadataObjects:(NSArray *)metadataObjects
+       fromConnection:(AVCaptureConnection *)connection {
+    
+}
 @end

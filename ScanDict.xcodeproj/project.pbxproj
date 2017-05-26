@@ -17,6 +17,7 @@
 		9DF9762B1ED7CCCB00BD5CA4 /* tessdata in Resources */ = {isa = PBXBuildFile; fileRef = 9DF9762A1ED7CCCB00BD5CA4 /* tessdata */; };
 		9DF9762D1ED7CD3500BD5CA4 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 9DF9762C1ED7CD3500BD5CA4 /* libz.tbd */; };
 		9DF9762F1ED7D04400BD5CA4 /* sample-en.png in Resources */ = {isa = PBXBuildFile; fileRef = 9DF9762E1ED7D04400BD5CA4 /* sample-en.png */; };
+		9DF976331ED7DA0400BD5CA4 /* SDPreviewView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DF976321ED7DA0400BD5CA4 /* SDPreviewView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -35,6 +36,8 @@
 		9DF9762A1ED7CCCB00BD5CA4 /* tessdata */ = {isa = PBXFileReference; lastKnownFileType = folder; path = tessdata; sourceTree = "<group>"; };
 		9DF9762C1ED7CD3500BD5CA4 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		9DF9762E1ED7D04400BD5CA4 /* sample-en.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "sample-en.png"; sourceTree = "<group>"; };
+		9DF976311ED7DA0400BD5CA4 /* SDPreviewView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDPreviewView.h; sourceTree = "<group>"; };
+		9DF976321ED7DA0400BD5CA4 /* SDPreviewView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDPreviewView.m; sourceTree = "<group>"; };
 		AD8B1990DF0947B8B0C14D86 /* libPods-ScanDict.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ScanDict.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -82,6 +85,7 @@
 		9DF976121ED7CC8A00BD5CA4 /* ScanDict */ = {
 			isa = PBXGroup;
 			children = (
+				9DF976301ED7D9F100BD5CA4 /* UI */,
 				9DF976161ED7CC8A00BD5CA4 /* AppDelegate.h */,
 				9DF976171ED7CC8A00BD5CA4 /* AppDelegate.m */,
 				9DF976191ED7CC8A00BD5CA4 /* ViewController.h */,
@@ -102,6 +106,15 @@
 				9DF976141ED7CC8A00BD5CA4 /* main.m */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		9DF976301ED7D9F100BD5CA4 /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				9DF976311ED7DA0400BD5CA4 /* SDPreviewView.h */,
+				9DF976321ED7DA0400BD5CA4 /* SDPreviewView.m */,
+			);
+			name = UI;
 			sourceTree = "<group>";
 		};
 		B65BDDA28AA20C3F54ED8527 /* Pods */ = {
@@ -240,6 +253,7 @@
 			files = (
 				9DF9761B1ED7CC8A00BD5CA4 /* ViewController.m in Sources */,
 				9DF976181ED7CC8A00BD5CA4 /* AppDelegate.m in Sources */,
+				9DF976331ED7DA0400BD5CA4 /* SDPreviewView.m in Sources */,
 				9DF976151ED7CC8A00BD5CA4 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -7,10 +7,12 @@
 //
 
 #import "ViewController.h"
+#import "SDPreviewView.h"
 
 //https://github.com/tesseract-ocr/tessdata/tree/bf82613055ebc6e63d9e3b438a5c234bfd638c93
 @interface ViewController ()
 
+@property(nonatomic, weak) IBOutlet SDPreviewView *previewView;
 @end
 
 @implementation ViewController
@@ -38,7 +40,6 @@
         //retrieve text
         NSLog(@"%@", [tesseract recognizedText]);
     });
-    
 }
 
 

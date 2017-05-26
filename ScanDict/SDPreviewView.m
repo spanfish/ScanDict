@@ -8,6 +8,8 @@
 
 #import <AVFoundation/AVFoundation.h>
 #import <QuartzCore/QuartzCore.h>
+#import <ReactiveObjC/ReactiveObjC.h>
+
 #import "SDPreviewView.h"
 
 typedef NS_ENUM(NSUInteger, ControlCorner) {
@@ -152,7 +154,6 @@ typedef struct ControlCornerPoint {
     CGRect oldRegionOfInterest = regionOfInterest;
     switch (recognizer.state) {
         case UIGestureRecognizerStateBegan:
-            [self willChangeValueForKey:@"regionOfInterest"];
             /*
              When the gesture begins, save the corner that is closes to
              the resize region of interest gesture recognizer's touch location.
@@ -181,10 +182,8 @@ typedef struct ControlCornerPoint {
             }
             [self setRegionOfInterestWithProposedRegionOfInterest: newRegionOfInterest];
         }
-            
             break;
         case UIGestureRecognizerStateEnded:
-            [self didChangeValueForKey:@"regionOfInterests"];
             currentControlCorner = ControlCornerNone;
             break;
         default:
@@ -208,8 +207,7 @@ typedef struct ControlCornerPoint {
     };
     
     ControlCornerPoint *corner = corners;
-    for(int i = 0; i < 4; i++) {
-        corner++;
+    for(int i = 0; i < 4; i++,corner++) {
         CGFloat dx = point.x - corner->point.x;
         CGFloat dy = point.y - corner->point.y;
         CGFloat distance = sqrt(dx * dx + dy * dy);
@@ -217,6 +215,7 @@ typedef struct ControlCornerPoint {
             closestDistance = distance;
             closestCorner = corner->corner;
         }
+        
     }
     return closestCorner;
 }

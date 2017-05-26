@@ -49,8 +49,6 @@ typedef struct ControlCornerPoint {
     UIPanGestureRecognizer *resizeRegionOfInterestGestureRecognizer;
     
     AVCaptureVideoPreviewLayer *videoPreviewLayer;
-    
-    AVCaptureSession *session;
 }
 @end
 
@@ -226,5 +224,15 @@ typedef struct ControlCornerPoint {
         
     }
     return closestCorner;
+}
+
+- (AVCaptureSession *)session {
+    AVCaptureVideoPreviewLayer *previewLayer = (AVCaptureVideoPreviewLayer *)self.layer;
+    return previewLayer.session;
+}
+
+- (void)setSession:(AVCaptureSession *)session {
+    AVCaptureVideoPreviewLayer *previewLayer = (AVCaptureVideoPreviewLayer *)self.layer;
+    previewLayer.session = session;
 }
 @end

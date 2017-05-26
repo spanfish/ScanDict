@@ -9,10 +9,14 @@
 #import "ViewController.h"
 #import "SDPreviewView.h"
 
+@import AVFoundation;
+
 //https://github.com/tesseract-ocr/tessdata/tree/bf82613055ebc6e63d9e3b438a5c234bfd638c93
 @interface ViewController ()
 
 @property(nonatomic, weak) IBOutlet SDPreviewView *previewView;
+@property(nonatomic) AVCaptureSession *session;
+@property (nonatomic) dispatch_queue_t sessionQueue;
 @end
 
 @implementation ViewController
@@ -40,8 +44,68 @@
         //retrieve text
         NSLog(@"%@", [tesseract recognizedText]);
     });
+    
+    // Create the AVCaptureSession
+    self.session = [[AVCaptureSession alloc] init];
+    // Set up the preview view
+    self.previewView.session = self.session;
+    // Communicate with the session and other session objects on this queue
+    self.sessionQueue = dispatch_queue_create("session queue", DISPATCH_QUEUE_SERIAL);
+    
+    // Check video authorization status. Video access is required and audio access is optional.
+    // If audio access is denied, audio is not recorded during movie recording.
+    switch([AVCaptureDevice authorizationStatusForMediaType:AVMediaTypeVideo]) {
+        case AVAuthorizationStatusAuthorized:
+            // The user has previously granted access to the camera
+            break;
+        case AVAuthorizationStatusNotDetermined: {
+            // The user has not yet been presented with the option to grant video access.
+            // We suspend the session queue to delay session running until the access request has completed.
+            // Note that audio access will be implicitly requested when we create an AVCaptureDeviceInput for audio during session setup.
+            dispatch_suspend(self.sessionQueue);
+            [AVCaptureDevice requestAccessForMediaType:AVMediaTypeVideo completionHandler:^(BOOL granted) {
+                if(!granted) {
+                    
+                }
+                dispatch_resume(self.sessionQueue);
+            }];
+        }
+            break;
+        default:
+            break;
+    }
+    
+    // Setup the capture session.
+    // Setup the capture session.
+    // In general it is not safe to mutate an AVCaptureSession or any of its inputs, outputs, or connections from multiple threads at the same time.
+    // Why not do all of this on the main queue?
+    // Because -[AVCaptureSession startRunning] is a blocking call which can take a long time. We dispatch session setup to the sessionQueue
+    // so that the main queue isn't blocked, which keeps the UI responsive.
+    dispatch_async(self.sessionQueue, ^{
+        [self configureSession];
+    } );
 }
 
+// Should be called on the session queue
+- (void)configureSession{
+    NSError *error = nil;
+    
+    [self.session beginConfiguration];
+    self.session.sessionPreset = AVCaptureSessionPresetHigh;
+    // Add video input
+    AVCaptureDevice *videoDevice = [AVCaptureDevice defaultDeviceWithDeviceType:AVCaptureDeviceTypeBuiltInWideAngleCamera mediaType:AVMediaTypeVideo position:AVCaptureDevicePositionUnspecified];
+    AVCaptureDeviceInput *videoDeviceInput = [AVCaptureDeviceInput deviceInputWithDevice:videoDevice error:&error];
+    if(!videoDeviceInput) {
+        return;
+    }
+    
+    if([self.session canAddInput:videoDeviceInput]) {
+        [self.session addInput:videoDeviceInput];
+    }
+    
+    [self.session commitConfiguration];
+    [self.session startRunning];
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

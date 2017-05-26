@@ -10,4 +10,5 @@
 
 @interface SDPreviewView : UIView
 
+@property (nonatomic) AVCaptureSession *session;
 @end
